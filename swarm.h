@@ -1,9 +1,7 @@
 #ifndef SWARM_H
 #define SWARM_H
 #include <iostream>
-using namespace std;
-class Grader;//this class is for grading purposes, no need to do anything                                                                            
-class Tester;//this is your tester class, you add your test functions in this class                                                                  
+using namespace std;                                                              
 enum STATE {ALIVE, DEAD};
 enum ROBOTTYPE {BIRD, DRONE, REPTILE, SUB, QUADRUPED};
 const int MINID = 10000;
@@ -15,8 +13,6 @@ const int MAXID = 99999;
 class Robot{
 public:
   friend class Swarm;
-  friend class Grader;
-  friend class Tester;
   Robot(int id, ROBOTTYPE type = DEFAULT_TYPE, STATE state = DEFAULT_STATE)//Constructor with parameters to assign member variables                  
     :m_id(id),m_type(type), m_state(state) {
     m_left = nullptr;
@@ -78,8 +74,6 @@ private:
 };
 class Swarm{
 public:
-  friend class Grader;
-  friend class Tester;
   Swarm();
   ~Swarm();
   void insert(const Robot& robot);
