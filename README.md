@@ -6,7 +6,7 @@ Arjun Kundu
 
 Definition of BST: A binary tree is a tree structure in which each node has either 0, 1, or 2 children.
 
-This program creates a BST of "Robot" objects with a specific ID, Type, and State. ID's are randomly generated using the Random Class found in mytest.cpp. States include: ("Alive","Dead"). Robot types include: (BIRD, DRONE, REPTILE, SUB, QUADRUPED).
+This program creates a BST of "Robot" objects with a specific ID, Type, and State. ID's are distinct, randomly generated using the Random Class found in mytest.cpp. States include: ("Alive","Dead"). Robot types include: (BIRD, DRONE, REPTILE, SUB, QUADRUPED).
 
 Objectives:
 
