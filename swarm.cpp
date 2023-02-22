@@ -9,8 +9,7 @@ Swarm::~Swarm(){//Destructor
 }
 
 void Swarm::insert(const Robot& robot){
-  m_root = insert(robot,m_root);
-  //cout<<"After Insert Check, did it go through???"<<endl;                                                                                          
+  m_root = insert(robot,m_root);                                                                                        
 }
 
 
@@ -20,7 +19,8 @@ void Swarm::insert(const Robot& robot){
   2.)Call UpdateHeight() to Update the height of tree                                                                                                
   3.)Call Rebalance() to rebalance the tree after insertion                                                                                          
  */
-Robot* Swarm::insert(const Robot& robot,Robot*& aNode){//Helper function, recursivly iterates tree, inserts object and returns to OG insert()        
+//Helper function, recursivly iterates tree, inserts object and returns to OG insert()
+Robot* Swarm::insert(const Robot& robot,Robot*& aNode){        
   if(aNode == nullptr){//if tree empty, make new node from robot values and return                                                                   
     Robot* aNode = new Robot(robot.m_id,robot.m_type,robot.m_state);
     return aNode;
@@ -30,8 +30,7 @@ Robot* Swarm::insert(const Robot& robot,Robot*& aNode){//Helper function, recurs
     updateHeight(aNode);
     return rebalance(aNode);
   }
-  else if ( aNode->m_id < robot.m_id){//if value is greater than node                                                                                
-    //SEG FAULT HERE     **FIXED**                                                                                                                      
+  else if ( aNode->m_id < robot.m_id){//if value is greater than node                                                                                                                                                                                                    
     aNode->m_right = insert(robot, aNode->m_right);//insert as right child                                                                           
     updateHeight(aNode);
     return rebalance(aNode);
@@ -67,8 +66,7 @@ Robot* Swarm::remove(Robot* aBot,int id){//Helper, called by remove(int id) to r
   else if(id > aBot->m_id)//traverse right                                                                                                           
     aBot->m_right = remove(aBot->m_right, id);
   //case with 2 children                                                                                                                             
-  else if(aBot->m_left && aBot->m_right){ //else if here is getting skipped?  **FIXED**                                                              
-    //cout<<"test1"<<endl;                                                                                                                           
+  else if(aBot->m_left && aBot->m_right){                                                                                                                                                                                   
     temp = findMin(aBot->m_right);//right childs lowest value                                                                                        
     aBot->m_id = temp->m_id;//copy lowest value to robot intended to delete                                                                          
     aBot->m_right = remove(aBot->m_right, aBot->m_id);//delete robot found                                                                           
@@ -76,20 +74,17 @@ Robot* Swarm::remove(Robot* aBot,int id){//Helper, called by remove(int id) to r
   else{// the case of zero or one child                                                                                                              
     // also, in the case of two children, after finding right’s lowest                                                                               
     // value we end up here by calling remove function recursively                                                                                   
-    temp = aBot;
-    //cout<<"test2"<<endl;                                                                                                                           
-    if(aBot->m_left == nullptr){
-      //cout<<"test3"<<endl;                                                                                                                         
+    temp = aBot;                                                                                                                         
+    if(aBot->m_left == nullptr){                                                                                                                        
       aBot = aBot->m_right;
     }
-    else if(aBot->m_right == nullptr){//SEG FAULT HERE      **FIXED**                                                                                
-      //cout<<"test4"<<endl;                                                                                                                         
+    else if(aBot->m_right == nullptr){                                                                                                                                                                                                
       aBot = aBot->m_left;
     }
     delete temp;
   }
-  updateHeight(aBot);
-  aBot = rebalance(aBot);
+  updateHeight(aBot); //Update tree height
+  aBot = rebalance(aBot);//Rebalance tree if needed
   return aBot;
 }
 
@@ -108,7 +103,7 @@ void Swarm::updateHeight(Robot* aBot){
   aBot->m_height = 1 + (leftHeight > rightHeight ? leftHeight : rightHeight);
 }
 
-int Swarm::checkImbalance(Robot* aBot){
+int Swarm::checkImbalance(Robot* aBot){ //Checks if Tree is imablanced
   if (aBot == nullptr)
     return -1;
   else{
