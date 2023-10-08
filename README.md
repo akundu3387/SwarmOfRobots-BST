@@ -1,4 +1,4 @@
-# Binary-Search-Tree-BST
+# Swarm-Of-Robots-BST
 
 Arjun Kundu
 
